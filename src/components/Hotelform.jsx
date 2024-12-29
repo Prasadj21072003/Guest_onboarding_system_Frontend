@@ -15,6 +15,7 @@ const Hotelform = ({ func }) => {
   const [error, seterror] = useState(false);
   const { user } = Usezustand();
 
+  /* the submit function make a post request to create hotel */
   const submit = async (e) => {
     e.preventDefault();
     const formdata = new FormData();

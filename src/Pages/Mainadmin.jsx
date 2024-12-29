@@ -9,6 +9,7 @@ const Mainadmin = () => {
   const func = () => {
     setformon(false);
   };
+
   return (
     <div className="">
       {!formon && (

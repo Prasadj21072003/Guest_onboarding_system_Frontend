@@ -7,12 +7,15 @@ import axios from "axios";
 import Usezustand from "../components/Usezustand";
 
 const Edithotelform = () => {
-  var id = window.location.pathname.split("/")[2];
   const [data, setdata] = useState();
   const [newdata, setnewdata] = useState(data);
-  let navigate = useNavigate();
   const { user } = Usezustand();
+  let navigate = useNavigate();
+  let id = window.location.pathname.split("/")[2];
 
+  /*
+   The `editdata` function sends a PUT request to update hotel data using Axios.
+   */
   const editdata = async () => {
     try {
       console.log(newdata);
@@ -28,6 +31,9 @@ const Edithotelform = () => {
       console.log("error: " + error);
     }
   };
+
+  /* The `useEffect` hook in the provided code snippet is responsible for fetching data for a specific
+hotel based on the `id` parameter. */
 
   useEffect(() => {
     const getiddata = async () => {
@@ -47,9 +53,17 @@ const Edithotelform = () => {
     getiddata();
   }, []);
 
+  /* The `useEffect` hook in the provided code snippet is responsible for updating the `newdata` state
+whenever the `data` state changes. */
+
   useEffect(() => {
     setnewdata(data);
   }, [data]);
+
+  /*
+   The function `checkinputs` updates the `newdata` state based on the length of the input value of a target
+   element.
+  */
   const checkinputs = (e) => {
     if (e.target.value.length === 0) {
       setnewdata({ ...newdata, [e.target.name]: data[e.target.name] });
@@ -57,6 +71,7 @@ const Edithotelform = () => {
       setnewdata({ ...newdata, [e.target.name]: e.target.value });
     }
   };
+
   return (
     <div>
       <div className=" md:mt-[120px] mt-[80px]">

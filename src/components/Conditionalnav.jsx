@@ -8,8 +8,7 @@ export const Conditionalnav = ({ children }) => {
   const location = useLocation();
   const [navon, setnavon] = useState(true);
 
-  // Conditionally render Nav based on the current path
-
+  /* Conditionally render Nav based on the current path */
   useEffect(() => {
     if (
       location.pathname.includes("thankyou") === false &&

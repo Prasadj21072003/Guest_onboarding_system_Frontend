@@ -8,6 +8,7 @@ const Infolist = () => {
   const [data, setdata] = useState();
   const { user } = Usezustand();
 
+  /* getiddata function get guest data based on id */
   useEffect(() => {
     const getiddata = async () => {
       var id = window.location.pathname.split("/")[2];
@@ -26,6 +27,7 @@ const Infolist = () => {
     };
     getiddata();
   }, []);
+
   return (
     <div className="w-full h-auto flex justify-center items-center  bg-white ">
       <div className=" my-[50px]  border border-gray-300 rounded-[10px] bg-gray-50 relative  w-[600px] max-sm:w-[90vw] shadow-2xl h-auto  rounded-b-lg px-[2rem] max-sm:px-[1rem] pt-[2rem]">

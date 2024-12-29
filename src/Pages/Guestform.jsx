@@ -26,6 +26,10 @@ const Guestform = () => {
   const [submiton, setsubmiton] = useState(false);
   let navigate = useNavigate();
 
+  /*
+ The function `checknumber` validates input values for a phone number and proof number based on their
+ length.
+ */
   const checknumber = (e) => {
     if (e.target.name === "number") {
       if (e.target.value.toString().length === 10) {
@@ -44,6 +48,10 @@ const Guestform = () => {
     }
   };
 
+  /*
+  The function `postData` is an asynchronous function that handles form submission by making a POST
+  request to a create guest and navigating to a thank you page upon successful submission.
+ */
   const postdata = async (e) => {
     e.preventDefault();
     setsubmiton(true);
@@ -62,6 +70,7 @@ const Guestform = () => {
     }
   };
 
+  /* getiddata function get hotel data based on id  */
   useEffect(() => {
     var id = window.location.pathname.split("/")[2];
     const getiddata = async () => {
@@ -72,7 +81,7 @@ const Guestform = () => {
             pass: "random",
           },
         });
-        //  console.log(resp.data);
+
         setdata({
           hotelid: resp?.data._id,
           logo: resp?.data.logo,

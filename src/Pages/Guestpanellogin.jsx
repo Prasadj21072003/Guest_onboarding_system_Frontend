@@ -8,13 +8,14 @@ const Guestpanellogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [data, setdata] = useState();
-
   const [error, seterror] = useState(false);
+
   const { setguestlogin, setuser } = Usezustand();
   let navigate = useNavigate();
-  var path = window.location.pathname;
-  var id = path.split("/")[2];
+  let path = window.location.pathname;
+  let id = path.split("/")[2];
 
+  /* getiddata function get guest and hotel data based on id */
   useEffect(() => {
     const getiddata = async () => {
       if (path.includes("editguestform") || path.includes("infolist")) {
@@ -44,6 +45,10 @@ const Guestpanellogin = () => {
     getiddata();
   }, []);
 
+  /*
+  The handleSubmit function checks if the provided email and password match certain data and updates
+  the state accordingly.
+ */
   const handleSubmit = (e) => {
     e.preventDefault();
     if (email === data?.guestpanelemail && password === data?.guestpanelpass) {
@@ -54,6 +59,7 @@ const Guestpanellogin = () => {
       seterror(true);
     }
   };
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <form

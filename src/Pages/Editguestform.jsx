@@ -6,7 +6,6 @@ import Usezustand from "../components/Usezustand";
 import { url } from "../data";
 
 const Editguestform = () => {
-  var id = window.location.pathname.split("/")[2];
   const [data, setdata] = useState();
   const [newdata, setnewdata] = useState(data);
   const [hoteldata, sethoteldata] = useState();
@@ -16,7 +15,14 @@ const Editguestform = () => {
     number: false,
     idnumber: false,
   });
+
+  let id = window.location.pathname.split("/")[2];
   let navigate = useNavigate();
+
+  /*
+ The function `editdata` is an asynchronous function that handles editing data and making a PUT
+ request to update guest information.
+ */
 
   const editdata = async (e) => {
     e.preventDefault();
@@ -40,6 +46,10 @@ const Editguestform = () => {
     }
   };
 
+  /*
+  The function `checknumber` validates a phone number input to ensure it is 10 digits long and updates
+  state accordingly.
+ */
   const checknumber = (e) => {
     if (e.target.value.toString().length === 10) {
       setnewdata({ ...newdata, number: e.target.value });
@@ -52,6 +62,10 @@ const Editguestform = () => {
     }
   };
 
+  /*
+   The function `checkidproof` validates an input value to ensure it is either 12 characters long or
+   empty, updating state and error status accordingly.
+  */
   const checkidproof = (e) => {
     if (
       e.target.value.toString().length === 12 ||
@@ -67,6 +81,9 @@ const Editguestform = () => {
     }
   };
 
+  /*
+ The `checkinputs` function updates the `newdata` state based on the length of the input value of a target element.
+ */
   const checkinputs = (e) => {
     if (e.target.value.length === 0) {
       setnewdata({ ...newdata, [e.target.name]: data[e.target.name] });
@@ -75,6 +92,9 @@ const Editguestform = () => {
     }
   };
 
+  /*
+  The getiddata function get guest data of given id and set it to setdata also it get hotels data based on hotelid and set it to sethoteldata.
+  */
   useEffect(() => {
     const getiddata = async () => {
       try {

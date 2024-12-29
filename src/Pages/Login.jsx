@@ -9,8 +9,12 @@ const Login = () => {
   const [error, seterror] = useState(false);
   const { setuser } = Usezustand();
   let navigate = useNavigate();
-  var path = window.location.pathname;
+  let path = window.location.pathname;
 
+  /*
+   The handleSubmit function checks if the email and password match a specific value and either sets
+   the user data and navigates to a new path or sets an error flag.
+  */
   const handleSubmit = (e) => {
     e.preventDefault();
     if (email === "random@gmail.com" && password === "random") {
@@ -20,6 +24,7 @@ const Login = () => {
       seterror(true);
     }
   };
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <form

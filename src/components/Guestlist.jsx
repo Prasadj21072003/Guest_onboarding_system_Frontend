@@ -62,8 +62,14 @@ const Guestlist = () => {
       },
     },
   ];
+
+  const [data, setdata] = useState([]);
+  const [infoon, setinfoon] = useState(null);
   const { user } = Usezustand();
 
+  /*
+ The function `getdata` fetches guest data based on the ID from an API using Axios.
+ */
   const getdata = async () => {
     try {
       var id = window.location.pathname.split("/")[2];
@@ -84,8 +90,6 @@ const Guestlist = () => {
     getdata();
   }, []);
 
-  const [data, setdata] = useState([]);
-  const [infoon, setinfoon] = useState(null);
   const func = () => {
     setinfoon(null);
   };

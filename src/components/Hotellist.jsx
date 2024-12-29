@@ -8,8 +8,9 @@ import Usezustand from "./Usezustand";
 import { url } from "../data";
 
 const Hotellist = () => {
-  let navigate = useNavigate();
+  const [data, setdata] = useState([]);
   const { user, setuser, setguestlogin } = Usezustand();
+  let navigate = useNavigate();
 
   const columns = [
     { field: "_id", headerName: "ID", width: 220 },
@@ -109,6 +110,7 @@ const Hotellist = () => {
     },
   ];
 
+  /* handledelete function delete the hotel based on id  */
   const handledelete = async (id) => {
     console.log(id);
     const resp = await axios.delete(`${url}/api/hotels/${id}`, {
@@ -121,6 +123,7 @@ const Hotellist = () => {
     setdata(data?.filter((item) => item?._id !== id));
   };
 
+  /* The getdata function get hotels data */
   const getdata = async () => {
     try {
       const resp = await axios.get(`${url}/api/hotels`, {
@@ -138,8 +141,6 @@ const Hotellist = () => {
   useEffect(() => {
     getdata();
   }, []);
-
-  const [data, setdata] = useState([]);
 
   return (
     <div className="relative top-[50px] w-full h-screen px-[2rem] max-md:px-[0.5rem] py-[1rem]">

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import CloseIcon from "@mui/icons-material/Close";
 import { useNavigate } from "react-router";
+import { url } from "../data";
 
 const Infocard = ({ func, data }) => {
   const [openIndex, setOpenIndex] = useState(null);

@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
-
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Usezustand from "./Usezustand";
 import { url } from "../data";
+import Loader from "./Loader";
 
 const Hotellist = () => {
   const [data, setdata] = useState([]);
-  const { user, setuser, setguestlogin } = Usezustand();
+  const { user, setuser, setguestlogin, setloaderon, loaderon } = Usezustand();
   let navigate = useNavigate();
 
   const columns = [
@@ -22,7 +22,7 @@ const Hotellist = () => {
         return (
           <div className=" h-[100px]  w-full   flex justify-center items-center ">
             <img
-              src={`${url}/uploads/${params?.row?.logo}`}
+              src={params?.row?.logo}
               alt=""
               className=" object-cover w-[90px] h-[90px] rounded-full "
             />
@@ -44,9 +44,9 @@ const Hotellist = () => {
       renderCell: (params) => {
         return (
           <div className="">
-            <Link to={`${url}/QR/` + params?.row?.qr}>
+            <Link to={params?.row?.qr}>
               <img
-                src={`${url}/QR/${params?.row?.qr}`}
+                src={params?.row?.qr}
                 alt=""
                 width={100}
                 height={100}
@@ -133,6 +133,7 @@ const Hotellist = () => {
         },
       });
       setdata(resp?.data);
+      setloaderon(false);
     } catch (error) {
       console.log(error);
     }
@@ -144,22 +145,28 @@ const Hotellist = () => {
 
   return (
     <div className="relative top-[50px] w-full h-screen px-[2rem] max-md:px-[0.5rem] py-[1rem]">
-      <div className="px-[20px] py-[30px]">
-        <DataGrid
-          disableRowSelectionOnClick
-          rows={data}
-          columns={columns}
-          getRowId={(row) => row?._id}
-          rowHeight={105}
-          initialState={{
-            pagination: {
-              paginationModel: { page: 0, pageSize: 10 },
-            },
-          }}
-          pageSizeOptions={[5, 10]}
-          checkboxSelection
-        />
-      </div>
+      {loaderon ? (
+        <div className="px-[20px] py-[50px]">
+          <Loader />
+        </div>
+      ) : (
+        <div className="px-[20px] py-[30px]">
+          <DataGrid
+            disableRowSelectionOnClick
+            rows={data}
+            columns={columns}
+            getRowId={(row) => row?._id}
+            rowHeight={105}
+            initialState={{
+              pagination: {
+                paginationModel: { page: 0, pageSize: 10 },
+              },
+            }}
+            pageSizeOptions={[5, 10]}
+            checkboxSelection
+          />
+        </div>
+      )}
     </div>
   );
 };

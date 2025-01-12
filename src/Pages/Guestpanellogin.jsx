@@ -54,6 +54,14 @@ const Guestpanellogin = () => {
     if (email === data?.guestpanelemail && password === data?.guestpanelpass) {
       setguestlogin({ email: email, password: password });
       setuser({ email: "random@gmail.com", password: "random" });
+      window.localStorage.setItem(
+        "user",
+        JSON.stringify({ email: "random@gmail.com", password: "random" })
+      );
+      window.localStorage.setItem(
+        "guestlogin",
+        JSON.stringify({ email: email, password: password })
+      );
       navigate(path);
     } else {
       seterror(true);

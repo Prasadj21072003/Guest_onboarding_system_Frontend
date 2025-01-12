@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import axios from "axios";
-import { useNavigate } from "react-router";
 import Usezustand from "./Usezustand";
 import { url } from "../data";
 const Hotelform = ({ func }) => {
@@ -13,6 +12,7 @@ const Hotelform = ({ func }) => {
   });
   const [image, setimage] = useState();
   const [error, seterror] = useState(false);
+  const [hoteldatasubmmited, sethoteldatasubmmited] = useState(false);
   const { user } = Usezustand();
 
   /* the submit function make a post request to create hotel */
@@ -25,6 +25,7 @@ const Hotelform = ({ func }) => {
     formdata.append("guestpanelemail", data?.guestpanelemail);
     formdata.append("guestpanelpass", data?.guestpanelpass);
     if (error === false) {
+      sethoteldatasubmmited(true);
       try {
         const resp = await axios.post(`${url}/api/hotels/`, formdata, {
           headers: {
@@ -35,6 +36,7 @@ const Hotelform = ({ func }) => {
         });
         console.log(resp.data);
         func();
+        sethoteldatasubmmited(false);
       } catch (error) {
         console.log(error);
       }
@@ -155,7 +157,13 @@ const Hotelform = ({ func }) => {
               </span>
             )}
           </div>
-          <div className="mt-1">
+          <div
+            className={`mt-1 ${
+              hoteldatasubmmited === false
+                ? `pointer-events-auto`
+                : `pointer-events-none`
+            }`}
+          >
             <button
               type="submit"
               class="relative w-full inline-flex mt-[30px] items-center justify-center p-4 px-6 py-[22px] overflow-hidden font-medium bg-indigo-600 text-white transition duration-300 ease-out border-[1px] hover:border-indigo-600 rounded-lg shadow-md group"

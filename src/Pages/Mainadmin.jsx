@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import Hotellist from "../components/Hotellist";
-
 import Hotelform from "../components/Hotelform";
 import AddIcon from "@mui/icons-material/Add";
 
 const Mainadmin = () => {
   const [formon, setformon] = useState(false);
+
   const func = () => {
     setformon(false);
   };
@@ -32,6 +32,7 @@ const Mainadmin = () => {
           </button>
         </div>
       )}
+
       {formon ? (
         <div className=" relative pt-[1.6rem] md:pt-[4.5rem]">
           <Hotelform func={func} />

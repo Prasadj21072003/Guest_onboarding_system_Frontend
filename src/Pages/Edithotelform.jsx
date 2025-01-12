@@ -107,22 +107,6 @@ whenever the `data` state changes. */
 
               <div className="mb-6">
                 <label
-                  htmlFor="logo"
-                  className="block text-sm font-medium text-gray-600"
-                >
-                  Logo
-                </label>
-                <input
-                  type="file"
-                  id="logo"
-                  name="logo"
-                  placeholder={data?.logo}
-                  className="mt-1 block w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded file:border file:border-gray-300 file:text-gray-600 file:bg-gray-100 hover:file:bg-gray-200"
-                />
-              </div>
-
-              <div className="mb-6">
-                <label
                   htmlFor="address"
                   name="address"
                   className="block text-sm font-medium text-gray-600"
@@ -151,6 +135,7 @@ whenever the `data` state changes. */
                   type="text"
                   required
                   id="Guestemail"
+                  name="guestpanelemail"
                   placeholder={data?.guestpanelemail}
                   onChange={(e) => checkinputs(e)}
                   className="mt-1 block w-full rounded-md p-[0.8rem] border-gray-300 shadow-sm focus:ring-2 focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
@@ -167,6 +152,7 @@ whenever the `data` state changes. */
                   type="text"
                   required
                   id="Guestpassword"
+                  name="guestpanelpass"
                   placeholder={data?.guestpanelpass}
                   onChange={(e) => checkinputs(e)}
                   className="mt-1 block w-full rounded-md p-[0.8rem] border-gray-300 shadow-sm focus:ring-2 focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"

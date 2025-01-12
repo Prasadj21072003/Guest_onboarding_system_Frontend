@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import Nav from "../components/Nav";
 import { url } from "../data";
 
 const Guestform = () => {
@@ -100,7 +99,7 @@ const Guestform = () => {
       <div className="mb-6 w-full ">
         <div className="flex items-center mb-4">
           <img
-            src={`${url}/uploads/${data?.logo}`}
+            src={data?.logo}
             alt="Hotel Logo"
             className="w-[50px] h-[50px] rounded-full mr-4 border border-gray-300"
           />

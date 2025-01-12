@@ -1,29 +1,30 @@
 import React, { useState, useEffect } from "react";
-
 import { DataGrid } from "@mui/x-data-grid";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Infocard from "./Infocard";
 import Usezustand from "./Usezustand";
 import { url } from "../data";
+import Loader from "./Loader";
 
 const Guestlist = () => {
+  console.log(url);
+
   const columns = [
     { field: "_id", headerName: "ID", width: 250 },
     {
       field: "logo",
       headerName: "Logo",
-      width: 100,
+      width: 140,
       renderCell: (params) => {
         return (
-          <div className=" h-full flex justify-center items-center">
+          <div className=" h-[100px] w-[100px]  flex justify-center items-center">
             <img
-              src={`${url}/uploads/${params?.row?.logo}`}
+              src={params?.row?.logo}
               alt=""
               width={100}
               height={90}
-              className="w-[50px] h-[50px] rounded-full my-[3px] border border-gray-300"
+              className="object-cover w-[90px] h-[90px] rounded-full my-[3px] border border-gray-300"
             />
           </div>
         );
@@ -65,7 +66,7 @@ const Guestlist = () => {
 
   const [data, setdata] = useState([]);
   const [infoon, setinfoon] = useState(null);
-  const { user } = Usezustand();
+  const { user, setloaderon, loaderon } = Usezustand();
 
   /*
  The function `getdata` fetches guest data based on the ID from an API using Axios.
@@ -81,6 +82,7 @@ const Guestlist = () => {
       });
       console.log(resp?.data);
       setdata(resp?.data);
+      setloaderon(false);
     } catch (error) {
       console.log(error);
     }
@@ -96,27 +98,33 @@ const Guestlist = () => {
 
   return (
     <div className="relative top-[50px] w-full h-screen px-[2rem] max-md:px-[0.5rem] py-[1rem] ">
-      <div className="px-[20px] py-[30px] max-sm:px-[10px] relative">
-        <DataGrid
-          disableRowSelectionOnClick
-          rows={data}
-          columns={columns}
-          getRowId={(row) => row?._id}
-          rowHeight={70}
-          initialState={{
-            pagination: {
-              paginationModel: { page: 0, pageSize: 10 },
-            },
-          }}
-          pageSizeOptions={[5, 10]}
-          checkboxSelection
-        />
-        {infoon !== null && (
-          <div className=" w-full max-sm:w-[100%] h-auto  pt-[4rem] left-0 fixed top-[5%] z-[999] sm:mx-auto my-auto   ">
-            <Infocard func={func} data={infoon} />
-          </div>
-        )}
-      </div>
+      {loaderon ? (
+        <div className="px-[20px] py-[50px]">
+          <Loader />
+        </div>
+      ) : (
+        <div className="px-[20px] py-[30px] max-sm:px-[10px] relative">
+          <DataGrid
+            disableRowSelectionOnClick
+            rows={data}
+            columns={columns}
+            getRowId={(row) => row?._id}
+            rowHeight={105}
+            initialState={{
+              pagination: {
+                paginationModel: { page: 0, pageSize: 10 },
+              },
+            }}
+            pageSizeOptions={[5, 10]}
+            checkboxSelection
+          />
+          {infoon !== null && (
+            <div className=" w-full max-sm:w-[100%] h-auto  pt-[4rem] left-0 fixed top-[5%] z-[999] sm:mx-auto my-auto   ">
+              <Infocard func={func} data={infoon} />
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

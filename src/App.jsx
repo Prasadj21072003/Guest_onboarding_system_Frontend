@@ -4,27 +4,35 @@ import {
   Routes,
   useLocation,
 } from "react-router";
-
 import "./App.css";
 import Mainadmin from "./Pages/Mainadmin";
-
 import Guestadmin from "./Pages/Guestadmin";
 import Guestform from "./Pages/Guestform";
-import Hotelform from "./components/Hotelform";
 import Edithotelform from "./Pages/Edithotelform";
 import Editguestform from "./Pages/Editguestform";
 import Thankyou from "./Pages/Thankyou";
-
 import Infolist from "./Pages/Infolist";
-import Nav from "./components/Nav";
 import Usezustand from "./components/Usezustand";
 import Login from "./Pages/Login";
 import Guestpanellogin from "./Pages/Guestpanellogin";
-import { useEffect, useState } from "react";
 import { Conditionalnav } from "./components/Conditionalnav";
+import { useEffect } from "react";
 
 function App() {
-  const { user, guestlogin } = Usezustand();
+  const { user, setuser, guestlogin, setguestlogin } = Usezustand();
+  useEffect(() => {
+    const userdata = window.localStorage.getItem("user");
+    const guestdata = window.localStorage.getItem("guestlogin");
+    console.log(typeof userdata);
+    console.log(typeof guestdata);
+
+    if (typeof userdata === "string" && Object.keys(userdata).length > 0) {
+      setuser(JSON.parse(userdata));
+    }
+    if (typeof guestdata === "string" && Object.keys(guestdata).length > 0) {
+      setguestlogin(JSON.parse(guestdata));
+    }
+  }, []);
 
   return (
     <Router>

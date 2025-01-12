@@ -133,7 +133,7 @@ const Editguestform = () => {
           <div className="mb-6 w-full ">
             <div className="flex items-center mb-4">
               <img
-                src={`${url}/uploads/${data?.logo}`}
+                src={data?.logo}
                 alt="Hotel Logo"
                 className="w-[50px] h-[50px] rounded-full mr-4 border border-gray-300"
               />

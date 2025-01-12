@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import Usezustand from "./Usezustand";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
@@ -65,7 +64,13 @@ const Nav = () => {
             <span className="absolute right-0 flex ml-[5px] items-center justify-start w-10 h-10 duration-700 transform translate-x-full group-hover:translate-x-0 ease">
               <KeyboardArrowRightIcon fontSize="small" />
             </span>
-            <span className="relative hover:translate-x-[-15px] duration-500 ease transition-all ">
+            <span
+              onClick={() => {
+                window.localStorage.setItem("user", JSON.stringify({}));
+                window.localStorage.setItem("guestlogin", JSON.stringify({}));
+              }}
+              className="relative hover:translate-x-[-15px] duration-500 ease transition-all "
+            >
               Logout
             </span>
           </button>

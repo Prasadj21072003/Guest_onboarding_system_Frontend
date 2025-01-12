@@ -5,6 +5,7 @@ import PrintIcon from "@mui/icons-material/Print";
 import { url } from "../data";
 
 const Infolist = () => {
+  console.log(url);
   const [data, setdata] = useState();
   const { user } = Usezustand();
 
@@ -35,7 +36,7 @@ const Infolist = () => {
           <li className="flex justify-between">
             <strong>Logo:</strong>{" "}
             <img
-              src={`${url}/uploads/${data?.logo}`}
+              src={data?.logo}
               alt=""
               width={100}
               height={100}

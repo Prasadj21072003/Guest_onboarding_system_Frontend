@@ -5,6 +5,8 @@ const Usezustand = create((set) => ({
   setuser: (data) => set({ user: data }),
   guestlogin: {},
   setguestlogin: (data) => set({ guestlogin: data }),
+  loaderon: true,
+  setloaderon: (data) => set({ loaderon: data }),
 }));
 
 export default Usezustand;
